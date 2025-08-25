@@ -14,3 +14,14 @@ The stack includes:
 - `db` PostgreSQL at port 5432.
 
 Environment variables can be configured via `.env` files. See `.env.example` for defaults.
+
+## Vercel
+
+The repository uses a monorepo layout. When deploying to Vercel, set the project root to the `web` directory or rely on the
+root `vercel-build` script which builds the web workspace:
+
+```bash
+npm run vercel-build
+```
+
+This ensures Vercel detects the Next.js app correctly.
