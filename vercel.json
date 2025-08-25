@@ -1,0 +1,8 @@
+{
+  "buildCommand": "npm run vercel-build",
+  "functions": {
+    "web/app/api/**/route.ts": {
+      "runtime": "nodejs20.x"
+    }
+  }
+}

@@ -17,11 +17,12 @@ Environment variables can be configured via `.env` files. See `.env.example` for
 
 ## Vercel
 
-The repository uses a monorepo layout. When deploying to Vercel, set the project root to the `web` directory or rely on the
-root `vercel-build` script which builds the web workspace:
+Deployment is configured through the root `vercel.json`. The build command runs the
+Next.js build inside the `web` workspace via the `vercel-build` script:
 
 ```bash
 npm run vercel-build
 ```
 
-This ensures Vercel detects the Next.js app correctly.
+Vercel reads the Next.js version from the root `package.json`, so `next` is declared
+as a dependency to allow the build to proceed.
