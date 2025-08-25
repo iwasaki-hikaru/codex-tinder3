@@ -28,3 +28,8 @@ Vercel reads the Next.js version from the root `package.json`, so `next` is decl
 as a dependency to allow the build to proceed. The `vercel.json` configuration uses
 `npm install --workspaces --include-workspace-root` so that all workspace packages are
 installed before running the `web` workspace build.
+
+Because Vercel's framework detection expects a Next.js configuration at the project
+root, a placeholder `next.config.js` file is included. The real application code
+lives in the `web` workspace, but this stub allows Vercel to recognize the project
+as a Next.js app and invoke the `vercel-build` script correctly.
