@@ -25,4 +25,6 @@ npm run vercel-build
 ```
 
 Vercel reads the Next.js version from the root `package.json`, so `next` is declared
-as a dependency to allow the build to proceed.
+as a dependency to allow the build to proceed. The `vercel.json` configuration uses
+`npm install --workspaces --include-workspace-root` so that all workspace packages are
+installed before running the `web` workspace build.
