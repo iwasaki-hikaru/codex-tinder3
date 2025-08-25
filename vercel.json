@@ -1,10 +1,5 @@
 {
   "framework": "nextjs",
   "installCommand": "npm install --workspaces --include-workspace-root",
-  "buildCommand": "npm run vercel-build",
-  "functions": {
-    "api/**": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  "buildCommand": "npm run vercel-build"
 }
