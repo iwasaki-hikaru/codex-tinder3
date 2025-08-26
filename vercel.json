@@ -1,0 +1,10 @@
+{
+  "builds": [
+    { "src": "web/package.json", "use": "@vercel/next" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "web/$1" }
+  ],
+  "installCommand": "npm install --workspaces --include-workspace-root",
+  "buildCommand": "npm run build --workspace web"
+}
