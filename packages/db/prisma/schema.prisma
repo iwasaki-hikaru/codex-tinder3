@@ -1,0 +1,70 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../src/generated"
+  binaryTargets   = ["debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  profile   Profile?
+  counter   Counter?
+  createdAt DateTime @default(now())
+}
+
+model Profile {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+  name      String
+  age       Int
+  bio       String?
+  photos    Photo[]
+  createdAt DateTime @default(now())
+}
+
+model Photo {
+  id        Int      @id @default(autoincrement())
+  profileId Int
+  url       String
+  profile   Profile @relation(fields: [profileId], references: [id])
+}
+
+model Swipe {
+  id        Int      @id @default(autoincrement())
+  fromId    Int
+  toId      Int
+  type      String
+  createdAt DateTime @default(now())
+}
+
+model Match {
+  id        Int      @id @default(autoincrement())
+  userAId   Int
+  userBId   Int
+  createdAt DateTime @default(now())
+  messages  Message[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  matchId   Int
+  senderId  Int
+  content   String
+  createdAt DateTime @default(now())
+  match     Match    @relation(fields: [matchId], references: [id])
+}
+
+model Counter {
+  id            Int    @id @default(autoincrement())
+  userId        Int    @unique
+  user          User   @relation(fields: [userId], references: [id])
+  superLikes    Int    @default(0)
+  boosts        Int    @default(0)
+}
