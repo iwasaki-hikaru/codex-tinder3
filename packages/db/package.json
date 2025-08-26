@@ -1,0 +1,18 @@
+{
+  "name": "db",
+  "private": true,
+  "main": "src/client.ts",
+  "scripts": {
+    "generate": "prisma generate --schema prisma/schema.prisma",
+    "migrate": "prisma migrate dev --schema prisma/schema.prisma",
+    "seed": "ts-node seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.9.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.9.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.4.0"
+  }
+}
