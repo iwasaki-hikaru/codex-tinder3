@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  api:
+    build: ./api
+    command: npm run dev
+    volumes:
+      - ./api:/app
+      - ./packages:/packages
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+      SESSION_SECRET: devsecret
+    depends_on:
+      - db
+    ports:
+      - '4000:4000'
+
+  web:
+    build: ./web
+    command: npm run dev
+    volumes:
+      - ./web:/app
+      - ./packages:/packages
+    environment:
+      NEXT_PUBLIC_API_BASE: http://api:4000
+      DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+    depends_on:
+      - api
+    ports:
+      - '3000:3000'
+
+volumes:
+  db-data:
